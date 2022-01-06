@@ -1,0 +1,24 @@
+{% extends 'quotes/quote_base.html' %}
+  {% block body_block %}
+  {% load quotes_extras %}
+  <div class="container mt-5 pt-5">
+    <div class="bg-white p-5 rounded-3 border shadow-lg">
+        <h1 class="display-4 fw-bold lh-1">{{ author_detail.name }}</h1>
+        <ul style="list-style-type:none">
+        {% for quote in author_detail.quotes.all %}
+
+        <li><p class="fs-4">"{{ quote }}"</p></li>
+        {% endfor %}
+        </ul>
+        <a class="btn btn-primary btn-lg px-4 me-md-2 fw-bold"
+        href="https://en.wikipedia.org/wiki/{{ author_detail.name|wikipedia_url }}"
+        target="_blank">Wikipedia</a>
+
+
+      </div>
+<div>
+
+
+
+
+  {% endblock %}

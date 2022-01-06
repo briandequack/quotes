@@ -1,0 +1,38 @@
+{% extends 'quotes/quote_base.html' %}
+
+  {% block body_block %}
+
+
+  <h3>Fill out the form.</h3>
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ user_form.as_p}}
+          <input type="submit" value="register">
+        </form>
+
+
+  <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+    <div class="row align-items-center g-lg-5 py-5">
+      <div class="col-lg-7 text-center text-lg-start">
+        <h1 class="display-4 fw-bold lh-1 mb-3">Sign up</h1>
+        <p class="col-lg-10 fs-4">When you join you will be able to add quote to this webite.</p>
+      </div>
+      <div class="col-md-10 mx-auto col-lg-5">
+        <form class="p-4 p-md-5 border rounded-3 bg-light" method="POST">
+          {% csrf_token %}
+          <div class="form-floating mb-3">
+
+            <label for="floatingInput">Email address</label>
+          </div>
+          <div class="form-floating mb-3">
+
+            <label for="floatingPassword">Password</label>
+          </div>
+          <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+          <hr class="my-4">
+          <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

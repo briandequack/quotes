@@ -1,0 +1,41 @@
+{% extends 'quotes/quote_base.html' %}
+  {% block body_block %}
+  <h1>Please login here</h1>
+
+
+  <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+  <div class="row align-items-center g-lg-5 py-5">
+    <div class="col-lg-7 text-center text-lg-start">
+      <h1 class="display-4 fw-bold lh-1 mb-3">Login here.</h1>
+      <p class="col-lg-10 fs-4">Your username is your email address.</p>
+    </div>
+    <div class="col-md-10 mx-auto col-lg-5">
+      <form class="p-4 p-md-5 border rounded-3 bg-light" action="{% url 'quotes:login' %}" method="POST">
+        {% csrf_token %}
+
+
+        <div class="form-floating mb-3">
+          <input type="text" name="username" class="form-control" id="floatingInput" placeholder="name@example.com">
+          <label for="username">Username:</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="password" name="password" class="form-control" placeholder="Password">
+            <label for="password">Password:</label>
+        </div>
+
+
+        <input class="w-100 btn btn-lg btn-primary" type="submit" value="Login">
+
+
+
+
+        <hr class="my-4">
+        <small class="text-muted">By logging in, you agree to the terms of use.</small>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+  {% endblock %}

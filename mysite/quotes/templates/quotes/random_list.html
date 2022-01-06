@@ -1,0 +1,88 @@
+{% extends 'quotes/quote_base.html' %}
+  {% block body_block %}
+  {% load quotes_extras %}
+
+
+  <div class="bg-primary text-secondary px-4 pt-5 text-center">
+    <div class="container">
+    <div class="pt-5 pb-4">
+      <h1 class="display-5 fw-bold text-white">{{ random_quote.text }}</h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="fs-5 mb-4 text-white">{{ random_quote.author }}</p>
+      </div>
+    </div>
+    </div>
+  </div>
+
+
+   {% if random_quote.author.bio != None or random_quote.author.quotes.all|length > 1 %}
+
+  <div class="container mt-5">
+   <nav>
+     <div class="nav nav-tabs" id="nav-tab" role="tablist">
+       {% if random_quote.author.bio != None and random_quote.author.quotes.all|length > 1 %}
+        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">About {{ random_quote.author }}</button>
+        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Other quotes from {{ random_quote.author }}</button>
+
+       {% elif random_quote.author.bio != None %}
+            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">About {{ random_quote.author }}</button>
+
+       {% elif random_quote.author.quotes.all|length > 1 %}
+          <button class="nav-link active" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">{{ random_quote.author }} quotes</button>
+       {% endif %}
+     </div>
+   </nav>
+
+
+   <div class="tab-content" id="nav-tabContent">
+
+     {% if random_quote.author.bio != None and random_quote.author.quotes.all|length > 1 %}
+      <div class="tab-pane fade show active p-3" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <h3>{{ random_quote.author }}</h3>
+        <p>{{ random_quote.author.bio }}</p>
+        <p>Article from <a href="http://www.wikipedia.com/wiki/{{ random_quote.author.slug|wikipedia_url }}" target="_blank">Wikipedia</a></p>
+
+      </div>
+
+     <div class="tab-pane fade p-3" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+       <h3>All Quotes</h3>
+       {% for thing in random_quote.author.quotes.all %}
+       <ul>
+         {% if thing.pk != random_quote.pk %}
+         <li>{{ thing.text }}</li>
+         {% endif %}
+      </ul>
+       {% endfor %}
+     </div>
+
+
+     {% elif random_quote.author.bio != None %}
+     <div class="tab-pane fade show active p-3" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+       <h3>{{ random_quote.author }}</h3>
+       <p>{{ random_quote.author.bio }}</p>
+       <p>Article from <a href="http://www.wikipedia.com/wiki/{{ random_quote.author.slug|wikipedia_url }}" target="_blank">Wikipedia</a></p>
+     </div>
+
+
+     {% elif random_quote.author.quotes.all|length > 1 %}
+     <div class="tab-pane fade show active p-3" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+       <h3>All Quotes</h3>
+       {% for thing in random_quote.author.quotes.all %}
+       <ul>
+         {% if thing.pk != random_quote.pk %}
+         <li>{{ thing.text }}</li>
+         {% endif %}
+      </ul>
+       {% endfor %}
+     </div>
+     {% endif %}
+
+
+
+   </div>
+
+   {% endif %}
+
+
+
+  {% endblock %}
